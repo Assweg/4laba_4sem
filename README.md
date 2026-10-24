@@ -1,164 +1,64 @@
-# Система мониторинга энергообъектов НСО
+# Мониторинг энергообъектов Новосибирской области
 
-Веб-приложение для мониторинга и управления энергетическими объектами в Новосибирской области.
+![Стек](https://img.shields.io/badge/React%20%C2%B7%20Express%20%C2%B7%20PostgreSQL-334155?style=flat-square) ![Семестр](https://img.shields.io/badge/семестр-4-0f766e?style=flat-square) ![Статус](https://img.shields.io/badge/статус-%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D1%8B%D0%B9%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82-64748b?style=flat-square)
 
-## Функциональность
+Учебное веб-приложение для работы с энергообъектами, инцидентами и отчётами. React-интерфейс обращается к Express API, данные хранятся в PostgreSQL.
 
-- Мониторинг состояния энергообъектов в реальном времени
-- Управление инцидентами и авариями
-- Создание и управление отчетами
-- Система аутентификации и авторизации
-- Ролевая модель доступа (администратор, оператор)
-- Визуализация данных с помощью графиков
-- API для интеграции с внешними системами
+## Состав приложения
 
-## Технологии
+| Каталог | Назначение |
+|---|---|
+| [frontend](frontend/) | React, Material UI, маршрутизация и страницы приложения |
+| [backend/src](backend/src/) | Express, модели Sequelize, маршруты API и проверка JWT |
+| [database/init.sql](database/init.sql) | Начальная схема и данные БД |
+| [docker-compose.yml](docker-compose.yml) | Совместный запуск трёх сервисов |
 
-### Фронтенд
-- React
-- Material-UI
-- React Router
-- Chart.js
-- Axios
+## Запуск через Docker
 
-### Бэкенд
-- Node.js
-- Express
-- PostgreSQL
-- JWT для аутентификации
-- Docker
+Нужны Docker и Docker Compose.
 
-## Требования
-
-- Node.js 18+
-- PostgreSQL 14+
-- Docker и Docker Compose
-
-## Установка и запуск
-
-1. Клонировать репозиторий:
 ```bash
-git clone https://github.com/your-username/energy-monitoring.git
-cd energy-monitoring
+git clone https://github.com/Assweg/4laba_4sem.git
+cd 4laba_4sem
+docker compose up --build -d
 ```
 
-2. Создать файл `.env` в корневой директории:
-```env
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=your_password
-POSTGRES_DB=energy_monitoring
-JWT_SECRET=your_jwt_secret
-```
+| Сервис | Адрес на компьютере |
+|---|---|
+| Интерфейс | http://localhost:3001 |
+| Backend | http://localhost:5002 |
+| PostgreSQL | `localhost:5434` |
 
-3. Запустить приложение с помощью Docker Compose:
-```bash
-docker-compose up -d
-```
-
-Приложение будет доступно по адресу: http://localhost:3000
+Порты взяты из текущего `docker-compose.yml`. Для остановки: `docker compose down`.
 
 ## Разработка
 
-### Запуск фронтенда в режиме разработки:
+Frontend:
+
 ```bash
 cd frontend
 npm install
 npm start
 ```
 
-### Запуск бэкенда в режиме разработки:
+Backend в отдельном терминале:
+
 ```bash
 cd backend
-npm install
+npm ci
 npm run dev
 ```
 
-## API Документация
+Для запуска вне Docker отдельно настройте подключение backend к PostgreSQL и адрес API frontend.
 
-### Аутентификация
+## Конфигурация и статус
 
-#### POST /api/auth/register
-Регистрация нового пользователя
-```json
-{
-  "username": "string",
-  "email": "string",
-  "password": "string"
-}
-```
+Compose содержит демонстрационные реквизиты БД и значение JWT-секрета для учебного стенда. Перед внешним развёртыванием их нужно заменить. Исходники опубликованы как учебная работа; автоматический деплой, успешные тесты и готовность к промышленной эксплуатации здесь не заявляются.
 
-#### POST /api/auth/login
-Вход в систему
-```json
-{
-  "username": "string",
-  "password": "string"
-}
-```
+## Связанные материалы
 
-### Энергообъекты
+[Начальная версия интерфейса](https://github.com/Assweg/1laba_4sem) · [Локальные варианты проекта и отчёты](https://github.com/Assweg/nstu/tree/main/5sem/%D0%A2%D0%B8%D0%9C%D0%9F).
 
-#### GET /api/objects
-Получение списка всех объектов
+---
 
-#### POST /api/objects
-Создание нового объекта
-```json
-{
-  "name": "string",
-  "location": "string",
-  "type": "string",
-  "capacity": "number"
-}
-```
-
-### Инциденты
-
-#### GET /api/incidents
-Получение списка всех инцидентов
-
-#### POST /api/incidents
-Создание нового инцидента
-```json
-{
-  "object_id": "number",
-  "title": "string",
-  "description": "string",
-  "severity": "string"
-}
-```
-
-### Отчеты
-
-#### GET /api/reports
-Получение списка всех отчетов
-
-#### POST /api/reports
-Создание нового отчета
-```json
-{
-  "object_id": "number",
-  "title": "string",
-  "content": "string",
-  "report_type": "string"
-}
-```
-
-## Безопасность
-
-- Все пароли хешируются с использованием bcrypt
-- Используются JWT токены для аутентификации
-- Реализована ролевая модель доступа
-- Защита от XSS и CSRF атак
-- Безопасное хранение токенов в httpOnly cookies
-
-## CI/CD
-
-Проект использует GitHub Actions для автоматизации процессов:
-- Запуск тестов при каждом push и pull request
-- Автоматическая сборка Docker образов
-- Автоматический деплой на сервер при merge в main ветку
-
-## Лицензия
-
-MIT 
+[Все учебные работы](https://github.com/Assweg/nstu) · [Профиль Assweg](https://github.com/Assweg)
