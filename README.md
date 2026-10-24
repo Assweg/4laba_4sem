@@ -57,8 +57,20 @@ Compose содержит демонстрационные реквизиты Б�
 
 ## Связанные материалы
 
-[Начальная версия интерфейса](https://github.com/Assweg/1laba_4sem) · [Локальные варианты проекта и отчёты](https://github.com/Assweg/nstu/tree/main/5sem/%D0%A2%D0%B8%D0%9C%D0%9F).
+[Начальная версия интерфейса](https://github.com/Assweg/1laba_4sem) · [Локальные варианты проекта и отчёты](https://github.com/Assweg/nstu).
 
 ---
 
-[Все учебные работы](https://github.com/Assweg/nstu) · [Профиль Assweg](https://github.com/Assweg)
+[Каталог учебных репозиториев](https://github.com/Assweg/nstu) · [Профиль Assweg](https://github.com/Assweg)
+
+## Материалы из локальной папки
+
+Исходники и документы этой работы собраны в этом репозитории.
+
+Локальный вариант отличается от ранее опубликованного кода и сохранён в [local-version](local-version/). Основная версия остаётся в корне. Для запуска локального варианта сначала перейдите в его каталог.
+
+[local-version](local-version/) · [reports](reports/) · [variants](variants/)
+
+### Отчёты и документы
+
+- [Отчет Лабораторная 4 БутаковНМ.docx](reports/%D0%9E%D1%82%D1%87%D0%B5%D1%82%20%D0%9B%D0%B0%D0%B1%D0%BE%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%BD%D0%B0%D1%8F%204%20%D0%91%D1%83%D1%82%D0%B0%D0%BA%D0%BE%D0%B2%D0%9D%D0%9C.docx)
